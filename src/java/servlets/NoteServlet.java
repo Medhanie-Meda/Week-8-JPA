@@ -4,6 +4,7 @@ import businesslogic.NoteService;
 import domainmodel.Note;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -32,9 +33,9 @@ public class NoteServlet extends HttpServlet {
         
         //I am here...
         
-        ArrayList<Note> notes = null;        
+        List<Note> notes = null;        
         try {
-            notes = (ArrayList<Note>) us.getAll();
+            notes = us.getAll();
         } catch (Exception ex) {
             Logger.getLogger(NoteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,9 +71,9 @@ public class NoteServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Whoops.  Could not perform that action.");
         }
         
-        ArrayList<Note> notes = null;
+        List<Note> notes = null;
         try {
-            notes = (ArrayList<Note>) ns.getAll();
+            notes = (List<Note>) ns.getAll();
         } catch (Exception ex) {
             Logger.getLogger(NoteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -10,35 +10,37 @@ import java.util.List;
 
 public class NoteService {
 
-    private NoteDB userDB;
+    private NoteDB noteDB;
 
     public NoteService() {
-        userDB = new NoteDB();
+        noteDB = new NoteDB();
     }
 
     public Note get(int noteId) throws Exception {
-        return userDB.getNote(noteId);
+        return noteDB.getNote(noteId);
     }
 
     public List<Note> getAll() throws Exception {
-        return userDB.getAll();
+        return noteDB.getAll();
     }
 
     public int update(int noteId, String contents) throws Exception {
-        Note note = new Note(noteId, contents);
-        return userDB.update(note);
+        Note note = noteDB.getNote(noteId);
+        note.setContents(contents);    
+        return noteDB.update(note);
     }
 
     public int delete(int noteId) throws Exception {
-        Note deletedNote = userDB.getNote(noteId);
-        return userDB.delete(deletedNote);
+        Note deletedNote = noteDB.getNote(noteId);
+        return noteDB.delete(deletedNote);
     }
 
     public int insert(String contents) throws Exception {
-        Note note = new Note(contents);
+        
         java.util.Date uDate = new java.util.Date();  
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-        note.setDateCreated(sDate);
-        return userDB.insert(note);
+        Note note = new Note(0, sDate, contents);
+        //note.setDateCreated(sDate);
+        return noteDB.insert(note);
     }       
 }
